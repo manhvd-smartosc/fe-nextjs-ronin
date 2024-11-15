@@ -1,0 +1,135 @@
+generator client {
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "rhel-openssl-3.0.x"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id              String    @id @default(cuid())
+  name            String
+  avatarUrl       String    @map("avatar_url")
+  address         String    @unique // Added to enable crypto authentication
+  createdAt       DateTime  @default(now()) @map("created_at")
+  bio             String?
+  lastUpdatedName DateTime? @map("last_updated_name")
+
+  Token        Token[]
+  Trade        Trade[]
+  Comment      Comment[]
+  WalletLogins WalletLogins?
+
+  @@map("users")
+}
+
+// Added for crypto authentication
+model WalletLogins {
+  id        BigInt   @id @default(autoincrement())
+  userId    String   @unique @map("user_id")
+  nonce     String
+  expiredAt DateTime @map("expired_at")
+  createdAt DateTime @default(now()) @map("created_at")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("wallet_logins")
+}
+
+model Token {
+  id            BigInt  @id @default(autoincrement())
+  name          String
+  ticker        String
+  description   String?
+  address       String  @unique
+  createdBy     String  @map("created_by")
+  lastBuy       BigInt  @default(0) @map("last_buy") @db.BigInt // Unix timestamp in milliseconds
+  lastComment   BigInt  @default(0) @map("last_comment") @db.BigInt // Unix timestamp in milliseconds
+  totalComments Int?    @default(0) @map("total_comments")
+  lastPrice     Float   @default(0) @map("last_price") @db.DoublePrecision
+  initPrice     Float   @default(0) @map("init_price") @db.DoublePrecision
+  initMcap      Float   @default(0) @map("init_mcap") @db.DoublePrecision
+  poolId        String? @map("pool_id")
+  lastMcap      Float   @default(0) @map("last_mcap") @db.DoublePrecision
+  imageUrl      String  @map("image_url")
+  telegramUrl   String? @map("telegram_url")
+  twitterUrl    String? @map("twitter_url")
+  websiteUrl    String? @map("website_url")
+  createdAt     BigInt  @default(0) @map("created_at") @db.BigInt // Unix timestamp in milliseconds
+  lastFeatured  BigInt  @default(0) @map("last_featured") @db.BigInt // Unix timestamp in milliseconds
+
+  transactionHash  String @default("") @map("transaction_hash")
+  transactionIndex Int    @default(0) @map("transaction_index")
+  logIndex         Int    @default(0) @map("log_index")
+  blockNumber      Int    @default(0) @map("block_number")
+
+  User        User          @relation(fields: [createdBy], references: [id])
+  Trade       Trade[]
+  Comment     Comment[]
+  Candlestick Candlestick[]
+
+  @@map("tokens")
+}
+
+enum TradeType {
+  BUY
+  SELL
+}
+
+model Trade {
+  id               BigInt    @id @default(autoincrement())
+  userId           String    @map("user_id")
+  tokenId          BigInt    @map("token_id")
+  tokenAmount      Float     @default(0) @map("token_amount") @db.DoublePrecision
+  ronAmount        Float     @default(0) @map("ron_amount") @db.DoublePrecision
+  createdAt        BigInt    @default(0) @map("created_at") @db.BigInt // Unix timestamp in milliseconds
+  type             TradeType @map("type")
+  lastPrice        Float     @default(0) @map("last_price") @db.DoublePrecision
+  lastMcap         Float     @default(0) @map("last_mcap") @db.DoublePrecision
+  transactionHash  String    @default("") @map("transaction_hash")
+  transactionIndex Int       @default(0) @map("transaction_index")
+  logIndex         Int       @default(0) @map("log_index")
+  blockNumber      Int       @default(0) @map("block_number")
+  collected        Boolean   @default(false)
+  token            Token     @relation(fields: [tokenId], references: [id])
+  user             User      @relation(fields: [userId], references: [id])
+
+  @@unique([transactionHash, logIndex])
+  @@map("trades")
+}
+
+model Comment {
+  id        BigInt  @id @default(autoincrement())
+  userId    String  @map("user_id")
+  tokenId   BigInt  @map("token_id")
+  text      String
+  imageUrl  String? @map("image_url")
+  createdAt BigInt  @default(0) @map("created_at") @db.BigInt // Unix timestamp in milliseconds
+
+  user  User  @relation(fields: [userId], references: [id])
+  token Token @relation(fields: [tokenId], references: [id])
+
+  @@map("comments")
+}
+
+enum CandlestickType {
+  ONE_MIN
+  FIVE_MIN
+}
+
+model Candlestick {
+  id        BigInt          @id @default(autoincrement())
+  tokenId   BigInt          @map("token_id")
+  open      Float           @default(0) @db.DoublePrecision // Mapping to PostgreSQL DOUBLE PRECISION
+  close     Float           @default(0) @db.DoublePrecision // Mapping to PostgreSQL DOUBLE PRECISION
+  high      Float           @default(0) @db.DoublePrecision // Mapping to PostgreSQL DOUBLE PRECISION
+  low       Float           @default(0) @db.DoublePrecision // Mapping to PostgreSQL DOUBLE PRECISION
+  volume    Float           @default(0) @db.DoublePrecision // Mapping to PostgreSQL DOUBLE PRECISION
+  timestamp BigInt          @default(0) @db.BigInt // Unix timestamp in milliseconds
+  type      CandlestickType @default(ONE_MIN) @map("type")
+  token     Token           @relation(fields: [tokenId], references: [id])
+
+  @@map("candlesticks")
+}

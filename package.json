@@ -1,0 +1,39 @@
+{
+  "name": "react-cardano",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "postinstall": "husky install"
+  },
+  "dependencies": {
+    "@next-auth/prisma-adapter": "^1.0.5",
+    "@prisma/client": "4.11.0",
+    "aws-amplify": "^6.8.2",
+    "ethers": "^6.13.4",
+    "next": "14.2.5",
+    "next-auth": "^4.24.10",
+    "prisma": "^4.11.0",
+    "react": "18.3.1",
+    "react-dom": "18.3.1"
+  },
+  "devDependencies": {
+    "@types/node": "20.14.10",
+    "@types/react": "18.3.3",
+    "@types/react-dom": "18.3.0",
+    "husky": "8.0.1",
+    "lint-staged": "13.0.3",
+    "prettier": "2.7.1",
+    "typescript": "5.5.3"
+  },
+  "lint-staged": {
+    "*.{ts,tsx}": [
+      "yarn format",
+      "yarn lint",
+      "git add ."
+    ]
+  }
+}

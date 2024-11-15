@@ -1,0 +1,25 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:database.db"
+}
+model User {
+  id               String            @id @default(cuid())
+  name             String?
+  email            String?           @unique
+  image            String?
+  publicAddress    String?           @unique // Added to enable crypto authentication
+  cryptoLoginNonce CryptoLoginNonce?
+}
+
+// Added for crypto authentication
+
+model CryptoLoginNonce {
+  userId  String   @unique
+  nonce   String
+  expires DateTime
+  user    User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}

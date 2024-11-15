@@ -1,0 +1,98 @@
+generator client {
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "rhel-openssl-3.0.x"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String        @id @default(cuid())
+  name         String
+  avatarUrl    String        @map("avatar_url")
+  address      String        @unique // Added to enable crypto authentication
+  createdAt    DateTime      @default(now()) @map("created_at")
+  bio          String?
+  Token        Token[]
+  Trade        Trade[]
+  Comment      Comment[]
+  WalletLogins WalletLogins?
+
+  @@map("users")
+}
+
+// Added for crypto authentication
+model WalletLogins {
+  id        BigInt   @id @default(autoincrement())
+  userId    String   @unique @map("user_id")
+  nonce     String
+  expiredAt DateTime @map("expired_at")
+  createdAt DateTime @default(now()) @map("created_at")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("wallet_logins")
+}
+
+model Token {
+  id            BigInt    @id @default(autoincrement())
+  name          String
+  ticker        String
+  description   String?
+  address       String    @unique
+  createdBy     String    @map("created_by")
+  lastBuy       DateTime? @map("last_buy")
+  lastComment   DateTime? @map("last_comment")
+  totalComments Int?      @default(0) @map("total_comments")
+  lastPrice     BigInt?   @default(0) @map("last_price")
+  poolId        String?   @map("pool_id")
+  lastMcap      BigInt?   @default(0) @map("last_mcap")
+  imageUrl      String    @map("image_url")
+  telegramUrl   String?   @map("telegram_url")
+  twitterUrl    String?   @map("twitter_url")
+  websiteUrl    String?   @map("website_url")
+  createdAt     DateTime  @default(now()) @map("created_at")
+
+  User    User      @relation(fields: [createdBy], references: [id])
+  Trade   Trade[]
+  Comment Comment[]
+
+  @@map("tokens")
+}
+
+enum TradeType {
+  BUY
+  SELL
+}
+
+model Trade {
+  id              BigInt    @id @default(autoincrement())
+  userId          String    @map("user_id")
+  tokenId         BigInt    @map("token_id")
+  tokenAmount     BigInt    @default(0) @map("token_amount")
+  ronAmount       BigInt    @default(0) @map("ron_amount")
+  createdAt       DateTime  @default(now()) @map("created_at")
+  type            TradeType @map("type")
+  transactionHash String    @map("transaction_hash")
+
+  token Token @relation(fields: [tokenId], references: [id])
+  user  User  @relation(fields: [userId], references: [id])
+
+  @@map("trades")
+}
+
+model Comment {
+  id        BigInt   @id @default(autoincrement())
+  userId    String   @map("user_id")
+  tokenId   BigInt   @map("token_id")
+  text      String
+  imageUrl  String?  @map("image_url")
+  createdAt DateTime @default(now()) @map("created_at")
+
+  user  User  @relation(fields: [userId], references: [id])
+  token Token @relation(fields: [tokenId], references: [id])
+
+  @@map("comments")
+}

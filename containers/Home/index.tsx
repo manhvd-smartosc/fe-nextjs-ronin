@@ -5,6 +5,9 @@ import ElonMusk from '@/assets/images/elon-musk.png';
 import BackgroundCover from './BackgroundCover';
 import TokenContainer from './TokenContainer';
 import { StyledHomePage } from './index.style';
+import CustomSelect from '@/components/CustomSelect/index';
+import { SORT_OPTIONS } from '@/constants';
+import CustomSearchInput from '@/components/CustomSearchInput';
 
 const Home = () => {
   const cards = Array(12).fill({
@@ -26,17 +29,33 @@ const Home = () => {
             position="relative"
             top="0"
             w="100%"
-            display="flex"
-            alignItems="center"
-            justifyContent="center"
             padding="32px 80px"
             bgImage={`url(${BackgroundContent.src})`}
           >
-            <Grid templateColumns="repeat(3, 1fr)" gap={6}>
-              {cards.map((card, index) => (
-                <TokenContainer key={index} />
-              ))}
-            </Grid>
+            <Box
+              display="flex"
+              alignItems="center"
+              justifyContent="flex-start"
+              marginBottom={30}
+              gap={6}
+            >
+              <CustomSelect
+                options={SORT_OPTIONS}
+                onChange={(value) => console.log(value)}
+              />
+              <CustomSearchInput
+                onSearch={(value) => {
+                  console.log(value);
+                }}
+              />
+            </Box>
+            <Box display="flex" alignItems="center" justifyContent="center">
+              <Grid templateColumns="repeat(3, 1fr)" gap={6}>
+                {cards.map((card, index) => (
+                  <TokenContainer key={index} />
+                ))}
+              </Grid>
+            </Box>
           </Box>
         </Box>
       </Box>

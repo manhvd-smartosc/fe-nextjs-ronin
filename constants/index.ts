@@ -15,3 +15,12 @@ export const CHANNEL = {
 export const ROUTE = {
   HOME: '/',
 };
+
+export const SORT_OPTIONS = [
+  { value: 'featured', label: 'Featured' },
+  { value: 'lastTrade', label: 'Last Trade' },
+  { value: 'creationTime', label: 'Creation Time' },
+  { value: 'lastReply', label: 'Last Reply' },
+  { value: 'currentlyLive', label: 'Currently Live' },
+  { value: 'marketCap', label: 'Market Cap' }
+];

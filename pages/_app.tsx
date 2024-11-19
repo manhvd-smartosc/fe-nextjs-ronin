@@ -1,6 +1,6 @@
 import type { AppProps } from 'next/app';
 import { SessionProvider } from 'next-auth/react';
-import { ChakraProvider, defaultSystem } from '@chakra-ui/react';
+import { ChakraProvider } from '@chakra-ui/react';
 import { Amplify } from 'aws-amplify';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -21,7 +21,7 @@ Amplify.configure({
 const App = ({ Component, pageProps: { session, ...pageProps } }: AppProps) => {
   return (
     <SessionProvider session={session}>
-      <ChakraProvider value={defaultSystem}>
+      <ChakraProvider>
         <Layout>
           <Component {...pageProps} />
           <ToastContainer />

@@ -3,11 +3,13 @@ import React, { useState } from 'react';
 import { signIn, signOut, useSession } from 'next-auth/react';
 import { toast } from 'react-toastify';
 import { Spinner } from '@chakra-ui/react';
+import Link from 'next/link';
 
 import VectorImg from '@/assets/images/vector.png';
 import { API_URL } from '@/constants';
 import LogoutIcon from '@/assets/icons/logout.svg';
 import { shortenAddress } from '@/utils/address';
+
 import { StyledHeader } from './index.style';
 
 declare global {
@@ -16,34 +18,38 @@ declare global {
   }
 }
 
-const Header: React.FC = () => {
-  const transactions = [
-    {
-      avatar:
-        'https://fastly.picsum.photos/id/951/200/300.jpg?hmac=88jOMC9sFPf_Y7l4aMvDLBsqNuoprR9_Rvvbqb0oRPA',
-      user: 'bump7759',
-      action: 'sold',
-      amount: '0.0123 RON',
-      token: 'PPNUT',
-    },
-    {
-      avatar:
-        'https://fastly.picsum.photos/id/237/200/300.jpg?hmac=TmmQSbShHz9CdQm0NkEjx1Dyh_Y984R9LpNrpvH2D_U',
-      user: 'bump7759',
-      action: 'bought',
-      amount: '0.0123 RON',
-      token: 'PPNUT',
-    },
-    {
-      avatar:
-        'https://fastly.picsum.photos/id/237/200/300.jpg?hmac=TmmQSbShHz9CdQm0NkEjx1Dyh_Y984R9LpNrpvH2D_U',
-      user: 'bump7759',
-      action: 'sold',
-      amount: '0.0123 RON',
-      token: 'PPNUT',
-    },
-  ];
+const transactions = [
+  {
+    avatar:
+      'https://fastly.picsum.photos/id/951/200/300.jpg?hmac=88jOMC9sFPf_Y7l4aMvDLBsqNuoprR9_Rvvbqb0oRPA',
+    user: 'bump7759',
+    action: 'sold',
+    amount: '0.0123 RON',
+    token: 'PPNUT',
+  },
+  {
+    avatar:
+      'https://fastly.picsum.photos/id/237/200/300.jpg?hmac=TmmQSbShHz9CdQm0NkEjx1Dyh_Y984R9LpNrpvH2D_U',
+    user: 'bump7759',
+    action: 'bought',
+    amount: '0.0123 RON',
+    token: 'PPNUT',
+  },
+  {
+    avatar:
+      'https://fastly.picsum.photos/id/237/200/300.jpg?hmac=TmmQSbShHz9CdQm0NkEjx1Dyh_Y984R9LpNrpvH2D_U',
+    user: 'bump7759',
+    action: 'sold',
+    amount: '0.0123 RON',
+    token: 'PPNUT',
+  },
+];
 
+interface HeaderProps {
+  handleOpenHowItWork: () => void;
+}
+
+const Header: React.FC<HeaderProps> = ({ handleOpenHowItWork }) => {
   const { data: session } = useSession({
     required: false,
   });
@@ -105,10 +111,24 @@ const Header: React.FC = () => {
         className="site-image"
         alt="logo"
       />
+      <Flex className="site-link-container">
+        <Box className="site-link" onClick={handleOpenHowItWork}>
+          How it works
+        </Box>
+        <Box className="site-link">
+          <Link
+            href={process.env.NEXT_PUBLIC_SUPPORT_LINK || ''}
+            passHref
+            target="_blank"
+          >
+            Support
+          </Link>
+        </Box>
+      </Flex>
       <Flex className="transaction-container ">
         <Box display="flex" whiteSpace="nowrap">
           {transactions.map((tx, index) => (
-            <Box display="flex">
+            <Box display="flex" key={index}>
               <Box display="flex" alignItems="center" pl={2}>
                 <Image
                   src={tx.avatar}

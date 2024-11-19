@@ -24,6 +24,25 @@ const StyledHeader = styled(Box)`
     margin-left: 10px;
   }
 
+  .site-link-container {
+    margin-left: 16px;
+    align-items: center;
+    gap: 16px;
+
+    .site-link {
+      cursor: pointer;
+      color: #f0f6ff;
+      font-size: 12px;
+      font-weight: 400;
+      line-height: 16px;
+
+      &:hover {
+        color: ${THEME_COLOR.primary};
+        text-decoration: underline;
+      }
+    }
+  }
+
   .transaction-container {
     align-items: center;
     border: 2px dashed #ac65f3;

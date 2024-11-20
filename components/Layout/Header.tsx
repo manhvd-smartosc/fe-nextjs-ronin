@@ -12,6 +12,8 @@ import {
 } from '@chakra-ui/react';
 import React, { useState } from 'react';
 import { signIn, signOut, useSession } from 'next-auth/react';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
 import { Spinner } from '@chakra-ui/react';
 import { SiweMessage } from 'siwe';
@@ -23,10 +25,9 @@ import { LuExternalLink } from 'react-icons/lu';
 
 import VectorImg from '@/assets/images/vector.png';
 import { API_URL } from '@/constants';
+import { shortenAddress } from '@/utils/address';
 
 import { StyledAddressInfoBtn, StyledHeader } from './index.style';
-import { shortenAddress } from '@/utils/address';
-import Link from 'next/link';
 
 declare global {
   interface Window {
@@ -45,71 +46,89 @@ export const AddressInfoBtn = ({
   address,
   onLogout,
 }: AddressInfoBtnProps) => {
+  const router = useRouter();
+
   return (
     <StyledAddressInfoBtn>
       <Popover placement="bottom-end">
-        <PopoverTrigger>
-          <Button className="address-info-btn" size="sm" variant="outline">
-            <Image
-              src="https://fastly.picsum.photos/id/951/200/300.jpg?hmac=88jOMC9sFPf_Y7l4aMvDLBsqNuoprR9_Rvvbqb0oRPA"
-              width="20px"
-              height="20px"
-              borderRadius="50%"
-            />
-            <Text>8XhtK7</Text>
-            <IoMdArrowDropdown />
-          </Button>
-        </PopoverTrigger>
-        <PopoverContent>
-          <PopoverBody>
-            <Box display="flex" justifyContent="space-between">
-              <Box display="flex" alignItems="center">
-                <Text fontSize="16px" fontWeight="700">
-                  My Account
-                </Text>
-              </Box>
-              <Button onClick={onLogout} className="logout-btn">
-                Logout
-              </Button>
-            </Box>
-            <Box
-              mt={5}
-              display="flex"
-              gap={2}
-              pb={5}
-              borderBottom="1px solid #302E2C"
-            >
-              <Box>
+        {({ onClose }) => (
+          <>
+            <PopoverTrigger>
+              <Button className="address-info-btn" size="sm" variant="outline">
                 <Image
                   src="https://fastly.picsum.photos/id/951/200/300.jpg?hmac=88jOMC9sFPf_Y7l4aMvDLBsqNuoprR9_Rvvbqb0oRPA"
-                  width="48px"
-                  height="48px"
+                  width="20px"
+                  height="20px"
                   borderRadius="50%"
                 />
-              </Box>
-              <Box
-                display="flex"
-                justifyContent="center"
-                flexDirection="column"
-                gap={1}
-              >
-                <Text textAlign="left" fontSize="16px" fontWeight="500">
-                  {name || '@8XhtK7'}
-                </Text>
-                <Box display="flex" gap={2}>
-                  <Text textAlign="left" color="#BEBDBA">
-                    {shortenAddress(address, 5) || '0x205...2ee8'}
-                  </Text>
-                  <IoCopyOutline color="#05AAD7" size={18} cursor="pointer" />
+                <Text>8XhtK7</Text>
+                <IoMdArrowDropdown />
+              </Button>
+            </PopoverTrigger>
+            <PopoverContent>
+              <PopoverBody>
+                <Box display="flex" justifyContent="space-between">
+                  <Box display="flex" alignItems="center">
+                    <Text fontSize="16px" fontWeight="700">
+                      My Account
+                    </Text>
+                  </Box>
+                  <Button onClick={onLogout} className="logout-btn">
+                    Logout
+                  </Button>
                 </Box>
-              </Box>
-            </Box>
-            <Box display="flex" gap={2} mt={5}>
-              <Text className="view-profile">View Profile</Text>
-              <LuExternalLink color="#AC65F3" size={18} cursor="pointer" />
-            </Box>
-          </PopoverBody>
-        </PopoverContent>
+                <Box
+                  mt={5}
+                  display="flex"
+                  gap={2}
+                  pb={5}
+                  borderBottom="1px solid #302E2C"
+                >
+                  <Box>
+                    <Image
+                      src="https://fastly.picsum.photos/id/951/200/300.jpg?hmac=88jOMC9sFPf_Y7l4aMvDLBsqNuoprR9_Rvvbqb0oRPA"
+                      width="48px"
+                      height="48px"
+                      borderRadius="50%"
+                    />
+                  </Box>
+                  <Box
+                    display="flex"
+                    justifyContent="center"
+                    flexDirection="column"
+                    gap={1}
+                  >
+                    <Text textAlign="left" fontSize="16px" fontWeight="500">
+                      {name || '@8XhtK7'}
+                    </Text>
+                    <Box display="flex" gap={2}>
+                      <Text textAlign="left" color="#BEBDBA">
+                        {shortenAddress(address, 5) || '0x205...2ee8'}
+                      </Text>
+                      <IoCopyOutline
+                        color="#05AAD7"
+                        size={18}
+                        cursor="pointer"
+                      />
+                    </Box>
+                  </Box>
+                </Box>
+                <Box display="flex" gap={2} mt={5}>
+                  <Text className="view-profile">View Profile</Text>
+                  <LuExternalLink
+                    color="#AC65F3"
+                    size={18}
+                    onClick={() => {
+                      router.push('/profile');
+                      onClose();
+                    }}
+                    cursor="pointer"
+                  />
+                </Box>
+              </PopoverBody>
+            </PopoverContent>
+          </>
+        )}
       </Popover>
     </StyledAddressInfoBtn>
   );
@@ -150,6 +169,7 @@ const Header: React.FC<HeaderProps> = ({ handleOpenHowItWork }) => {
   const { data: session } = useSession({
     required: false,
   });
+  const router = useRouter();
 
   const [loadingLogin, setLoadingLogin] = useState<boolean>(false);
 
@@ -218,6 +238,7 @@ const Header: React.FC<HeaderProps> = ({ handleOpenHowItWork }) => {
           src="https://tama.meme/media/8bfb9a9d631a8cfe928a9238f9cbad0a.svg"
           className="site-image"
           alt="logo"
+          onClick={() => router.push('/')}
         />
         <Flex className="site-link-container">
           <Box className="site-link" onClick={handleOpenHowItWork}>
@@ -290,7 +311,7 @@ const Header: React.FC<HeaderProps> = ({ handleOpenHowItWork }) => {
             <Text className="connect-btn">Connect Wallet</Text>
           </Box>
           {loadingLogin && (
-            <Spinner color="blue.500" animationDuration="0.8s" />
+            <Spinner color="blue.500" transitionDuration="0.8s" />
           )}
         </>
       )}

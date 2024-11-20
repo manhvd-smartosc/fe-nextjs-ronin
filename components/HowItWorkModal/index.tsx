@@ -29,7 +29,11 @@ const HowItWorkModal = ({ isOpen, onOpen, onClose }: HowItWorkModalProps) => {
         isCentered
       >
         <ModalOverlay />
-        <ModalContent backgroundColor={'#1A1A1A'} color={THEME_COLOR.text} border={'1px solid #3A3A38'}>
+        <ModalContent
+          backgroundColor={'#1A1A1A'}
+          color={THEME_COLOR.text}
+          border={'1px solid #3A3A38'}
+        >
           <ModalHeader textAlign={'center'}>How it works</ModalHeader>
           <ModalBody textAlign={'center'} backgroundColor={'#1A1A1A'}>
             <Box marginBottom={4}>
@@ -54,7 +58,7 @@ const HowItWorkModal = ({ isOpen, onOpen, onClose }: HowItWorkModalProps) => {
             </List>
           </ModalBody>
           <ModalFooter justifyContent={'center'}>
-            <Button variant={'solid'} onClick={onClose}>
+            <Button variant={'solid'} onClick={onClose} borderRadius={'20px'}>
               I'm ready to pump!
             </Button>
           </ModalFooter>

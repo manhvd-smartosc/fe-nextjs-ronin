@@ -18,9 +18,9 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
 
       <main>
         <Box
-          backgroundColor={THEME_COLOR.headerBg}
+          backgroundColor={'#1A1A1A'}
           color={THEME_COLOR.text}
-          minHeight={`calc(100vh - 56px - 56px)`}
+          minHeight={`calc(100vh - 76px - 56px)`}
         >
           {children}
         </Box>

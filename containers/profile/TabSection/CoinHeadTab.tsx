@@ -1,15 +1,5 @@
 import React from 'react';
-import {
-  Box,
-  Button,
-  Grid,
-  GridItem,
-  Image,
-  Text,
-  Flex,
-  Link,
-  IconButton,
-} from '@chakra-ui/react';
+import { Box, Button, Grid, Flex } from '@chakra-ui/react';
 import { IoEyeOff } from 'react-icons/io5';
 import { coinHeadFakeData } from './fakedata';
 import HeadCoinCard from '@/components/HeadCoinCard';
@@ -32,7 +22,13 @@ const CoinHeadTab = () => {
         </Button>
       </Flex>
 
-      <Grid templateColumns="repeat(4, 1fr)" gap={4}>
+      <Grid
+        templateColumns={{
+          base: 'repeat(1, 1fr)',
+          md: 'repeat(4, 1fr)',
+        }}
+        gap={4}
+      >
         {coinHeadFakeData.map((item, index) => (
           <HeadCoinCard
             name={item.name}

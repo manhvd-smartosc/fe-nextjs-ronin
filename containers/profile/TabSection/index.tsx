@@ -1,9 +1,10 @@
 import { Box, Tab, TabPanel, TabPanels, Tabs } from '@chakra-ui/react';
 import React from 'react';
-import CoinHeadTab from './CoinHeadTab';
 import CoinCreateTab from './CoinCreatedTab';
+import CoinHeldTab from './CoinHeldTab';
 
 import { StyledTabList } from './index.style';
+import RepliesTab from './RepliesTab';
 
 const TabSection: React.FC = () => {
   return (
@@ -12,7 +13,7 @@ const TabSection: React.FC = () => {
         <Box display={'flex'} justifyContent={'center'}>
           <StyledTabList>
             <Tab _selected={{ color: '#FAF7ED', fontWeight: 700 }}>
-              Coins head
+              Coins held
             </Tab>
             {'|'}
             <Tab _selected={{ color: '#FAF7ED', fontWeight: 700 }}>
@@ -29,16 +30,16 @@ const TabSection: React.FC = () => {
 
         <TabPanels>
           <TabPanel>
-            <CoinHeadTab />
+            <CoinHeldTab />
           </TabPanel>
           <TabPanel>
             <CoinCreateTab />
           </TabPanel>
           <TabPanel>
-            <p>Replies!</p>
+            <RepliesTab />
           </TabPanel>
           <TabPanel>
-            <p>Notification!</p>
+            <Box></Box>
           </TabPanel>
         </TabPanels>
       </Tabs>

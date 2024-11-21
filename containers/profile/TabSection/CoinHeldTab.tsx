@@ -1,11 +1,11 @@
 import React from 'react';
 import { Box, Button, Grid, Flex } from '@chakra-ui/react';
 import { IoEyeOff } from 'react-icons/io5';
-import { coinHeadFakeData } from './fakedata';
-import HeadCoinCard from '@/components/HeadCoinCard';
 import Pagination from '@/components/Pagination';
+import CoinHeldCard from '@/components/CoinHeldCard';
+import { coinHeadFakeData } from './fakedata';
 
-const CoinHeadTab = () => {
+const CoinHeldTab = () => {
   return (
     <Box p={4} borderRadius="lg">
       <Flex justify="space-between" align="center" mb={4}>
@@ -30,7 +30,7 @@ const CoinHeadTab = () => {
         gap={4}
       >
         {coinHeadFakeData.map((item, index) => (
-          <HeadCoinCard
+          <CoinHeldCard
             name={item.name}
             quantity={item.quantity}
             value={item.value}
@@ -45,4 +45,4 @@ const CoinHeadTab = () => {
   );
 };
 
-export default CoinHeadTab;
+export default CoinHeldTab;

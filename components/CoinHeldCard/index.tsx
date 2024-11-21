@@ -11,7 +11,7 @@ interface CoinCardProps {
   onRefresh: () => void;
 }
 
-const HeadCoinCard: React.FC<CoinCardProps> = ({
+const CoinHeldCard: React.FC<CoinCardProps> = ({
   name,
   value,
   quantity,
@@ -81,4 +81,4 @@ const HeadCoinCard: React.FC<CoinCardProps> = ({
   );
 };
 
-export default HeadCoinCard;
+export default CoinHeldCard;

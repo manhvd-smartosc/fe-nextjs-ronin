@@ -2,7 +2,6 @@ import React from 'react';
 import { Box, Button, Grid, Flex } from '@chakra-ui/react';
 import { IoEyeOff } from 'react-icons/io5';
 import { coinCreateFakeData } from './fakedata';
-import HeadCoinCard from '@/components/HeadCoinCard';
 import Pagination from '@/components/Pagination';
 import CoinCreatedCard from '@/components/CoinCreatedCard';
 
@@ -28,7 +27,7 @@ const CoinCreateTab = () => {
           base: 'repeat(1, 1fr)',
           md: 'repeat(3, 1fr)',
         }}
-        gap={6}
+        gap={4}
       >
         {coinCreateFakeData.map((item, index) => (
           <CoinCreatedCard data={item} />

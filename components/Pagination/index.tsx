@@ -29,8 +29,8 @@ const Pagination = ({
           fontSize={14}
           fontWeight={400}
           lineHeight={'21px'}
-          w={'32px'}
-          h={'32px'}
+          w={'40px'}
+          h={'40px'}
         >
           {i}
         </Button>,

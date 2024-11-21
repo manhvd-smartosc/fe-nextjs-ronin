@@ -1,7 +1,9 @@
-import { Box, Tab, TabList, TabPanel, TabPanels, Tabs } from '@chakra-ui/react';
+import { Box, Tab, TabPanel, TabPanels, Tabs } from '@chakra-ui/react';
 import React from 'react';
-import { StyledTabList } from './index.style';
 import CoinHeadTab from './CoinHeadTab';
+import CoinCreateTab from './CoinCreatedTab';
+
+import { StyledTabList } from './index.style';
 
 const TabSection: React.FC = () => {
   return (
@@ -30,7 +32,7 @@ const TabSection: React.FC = () => {
             <CoinHeadTab />
           </TabPanel>
           <TabPanel>
-            <p>Coin created!</p>
+            <CoinCreateTab />
           </TabPanel>
           <TabPanel>
             <p>Replies!</p>

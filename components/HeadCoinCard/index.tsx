@@ -23,7 +23,7 @@ const HeadCoinCard: React.FC<CoinCardProps> = ({
       p={4}
       bg="#FFFFFF0A"
       border="2px solid"
-      borderColor="gray.600"
+      borderColor="#E9DFF233"
       borderRadius="16px"
       backdropFilter={'blur(40px)'}
       boxShadow="0px -2px 1px 1px #AC65F3 inset, 0px -2px 3px 0px #FFFFFF inset"
@@ -59,7 +59,7 @@ const HeadCoinCard: React.FC<CoinCardProps> = ({
         </Flex>
         <IoReload cursor={'pointer'} />
       </Flex>
-      <Box mt={4} borderTop="1px solid" borderColor="gray.700" pt={2}>
+      <Box mt={4} borderTop="1px solid" borderColor="#E9DFF233" pt={2}>
         <Link
           href="#"
           isExternal

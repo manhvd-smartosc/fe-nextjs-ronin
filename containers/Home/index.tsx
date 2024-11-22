@@ -119,32 +119,26 @@ const Home = () => {
               />
               <CustomSearchInput onSearch={handleChangeSearch} />
             </Box>
-            {loading ? (
-              <Spinner transitionDuration="0.8s" />
-            ) : (
-              <>
-                <Box display="flex" alignItems="center" justifyContent="center">
-                  <Grid
-                    templateColumns={{
-                      base: 'repeat(1, 1fr)',
-                      lg: 'repeat(2, 1fr)',
-                      xl: 'repeat(3, 1fr)',
-                    }}
-                    gap={6}
-                  >
-                    {listToken?.map((token, index) => (
-                      <TokenContainer key={index} token={token} />
-                    ))}
-                  </Grid>
-                </Box>
-                {!!pagination?.totalPages && (
-                  <Pagination
-                    totalPages={pagination.totalPages}
-                    currentPage={pagination.page}
-                    onPageChange={handleChangePage}
-                  />
-                )}
-              </>
+            <Box display="flex" alignItems="center" justifyContent="center">
+              <Grid
+                templateColumns={{
+                  base: 'repeat(1, 1fr)',
+                  lg: 'repeat(2, 1fr)',
+                  xl: 'repeat(3, 1fr)',
+                }}
+                gap={6}
+              >
+                {listToken?.map((token, index) => (
+                  <TokenContainer key={index} token={token} />
+                ))}
+              </Grid>
+            </Box>
+            {!!pagination?.totalPages && (
+              <Pagination
+                totalPages={pagination.totalPages}
+                currentPage={pagination.page}
+                onPageChange={handleChangePage}
+              />
             )}
           </Box>
         </Box>

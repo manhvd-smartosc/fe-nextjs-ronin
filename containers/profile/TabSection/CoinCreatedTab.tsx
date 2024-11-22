@@ -72,29 +72,23 @@ const CoinCreateTab = () => {
           Hide dust token
         </Button>
       </Flex>
-      {loading ? (
-        <Spinner transitionDuration="0.8s" />
-      ) : (
-        <>
-          <Grid
-            templateColumns={{
-              base: 'repeat(1, 1fr)',
-              md: 'repeat(3, 1fr)',
-            }}
-            gap={4}
-          >
-            {listToken.map((token, index) => (
-              <TokenContainer key={index} token={token} />
-            ))}
-          </Grid>
-          {!!pagination?.totalPages && (
-            <Pagination
-              totalPages={pagination.totalPages}
-              currentPage={pagination.page}
-              onPageChange={handleChangePage}
-            />
-          )}
-        </>
+      <Grid
+        templateColumns={{
+          base: 'repeat(1, 1fr)',
+          md: 'repeat(3, 1fr)',
+        }}
+        gap={4}
+      >
+        {listToken.map((token, index) => (
+          <TokenContainer key={index} token={token} />
+        ))}
+      </Grid>
+      {!!pagination?.totalPages && (
+        <Pagination
+          totalPages={pagination.totalPages}
+          currentPage={pagination.page}
+          onPageChange={handleChangePage}
+        />
       )}
     </Box>
   );

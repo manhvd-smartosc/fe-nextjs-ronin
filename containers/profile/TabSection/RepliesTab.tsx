@@ -55,30 +55,24 @@ const RepliesTab = () => {
       <Flex justify="space-between" align="center" mb={4}>
         <Text>Only you can view your profile</Text>
       </Flex>
-      {loading ? (
-        <Spinner transitionDuration="0.8s" />
-      ) : (
-        <>
-          <Grid
-            templateColumns={{
-              base: 'repeat(1, 1fr)',
-              md: 'repeat(3, 1fr)',
-            }}
-            gap={4}
-          >
-            {listComment.map((comment, index) => (
-              <ReplyCard data={comment} />
-            ))}
-          </Grid>
+      <Grid
+        templateColumns={{
+          base: 'repeat(1, 1fr)',
+          md: 'repeat(3, 1fr)',
+        }}
+        gap={4}
+      >
+        {listComment.map((comment, index) => (
+          <ReplyCard data={comment} />
+        ))}
+      </Grid>
 
-          {!!pagination?.totalPages && (
-            <Pagination
-              totalPages={pagination.totalPages}
-              currentPage={pagination.page}
-              onPageChange={handleChangePage}
-            />
-          )}
-        </>
+      {!!pagination?.totalPages && (
+        <Pagination
+          totalPages={pagination.totalPages}
+          currentPage={pagination.page}
+          onPageChange={handleChangePage}
+        />
       )}
     </Box>
   );

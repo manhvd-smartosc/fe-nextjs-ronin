@@ -23,9 +23,7 @@ const Footer: React.FC = () => {
         <Text cursor="pointer">Privacy And Policy</Text>
       </Box>
       <Box>
-        <Text>
-          &copy; {new Date().getFullYear()} Your Company. All rights reserved.
-        </Text>
+        <Text>© Ronin 2024 copyright</Text>
       </Box>
       <Box
         display="flex"

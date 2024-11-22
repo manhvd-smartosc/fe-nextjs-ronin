@@ -103,8 +103,13 @@ const Header: React.FC<HeaderProps> = ({ handleOpenHowItWork }) => {
       });
 
       toast.success('Login successfully!');
-    } catch (error) {
-      toast.error('Login failed!');
+    } catch (error: any) {
+      if (error?.name === 'ProviderNotFound') {
+        toast.error('Please install Ronin Wallet');
+        return;
+      } else {
+        toast.error('Login failed!');
+      }
     } finally {
       setLoadingLogin(false);
     }

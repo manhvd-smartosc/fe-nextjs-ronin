@@ -13,6 +13,8 @@ import {
   ModalOverlay,
   Textarea,
 } from '@chakra-ui/react';
+import PepeImg from '@/assets/images/pepe.png';
+
 import { StyledModalContent, StyledModalHeader } from './index.style';
 
 interface EditProfileModalProps {
@@ -85,7 +87,7 @@ const EditProfileModal: React.FC<EditProfileModalProps> = ({
             <Box className="image-wrap-container">
               <Box borderRadius="50%">
                 <Image
-                  src={currentData.avatarUrl}
+                  src={currentData.avatarUrl || PepeImg.src}
                   alt="avatar"
                   className="image-preview"
                 />

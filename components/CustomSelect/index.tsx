@@ -12,6 +12,7 @@ import {
 interface Option {
   label: string;
   value: string;
+  key: string;
 }
 
 interface CustomSelectProps {
@@ -57,7 +58,7 @@ const CustomSelect = ({ prefix, options, onChange }: CustomSelectProps) => {
             <OptionItem
               key={index}
               onClick={() => handleOptionClick(option)}
-              isSelected={selectedOption.value === option.value}
+              isSelected={selectedOption.key === option.key}
             >
               {option.label}
             </OptionItem>

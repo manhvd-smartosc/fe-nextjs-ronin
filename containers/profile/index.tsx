@@ -12,6 +12,7 @@ import BackgroundCover from './BackgroundCover';
 import AvatarNameBox from './AvatarNameBox';
 import EditProfileModal from './EditProfileModal';
 import TabSection from './TabSection';
+import PepeImg from '@/assets/images/pepe.png';
 import { StyledProfilePage } from './index.style';
 
 const Profile: React.FC = () => {
@@ -86,7 +87,7 @@ const Profile: React.FC = () => {
       <StyledProfilePage>
         <BackgroundCover>
           <AvatarNameBox
-            avatarUrl={profileDetail.avatarUrl}
+            avatarUrl={profileDetail.avatarUrl || PepeImg.src}
             name={
               profileDetail.name ||
               `@${getFirstSixChars(session?.user.publicAddress)}`

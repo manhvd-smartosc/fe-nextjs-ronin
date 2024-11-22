@@ -11,7 +11,7 @@ const StyledProfileAvatarNameBox = styled(Box)`
   z-index: 10;
   left: 50%;
   transform: translateX(-50%);
-  bottom: -180px;
+  bottom: -145px;
   color: #faf7ed;
 
   .name {

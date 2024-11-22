@@ -19,7 +19,11 @@ const AvatarNameBox: React.FC<AvatarNameBoxProps> = ({
 }) => {
   return (
     <StyledProfileAvatarNameBox>
-      <Box border={'2px solid #6B6B69'} borderRadius="full">
+      <Box
+        border={'2px solid #6B6B69'}
+        borderRadius="full"
+        backgroundColor={'#1A1A1A'}
+      >
         <Image src={avatarUrl} borderRadius="full" boxSize="120px" />
       </Box>
       <Box className="name">{name}</Box>

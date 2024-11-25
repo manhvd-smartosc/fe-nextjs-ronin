@@ -2,22 +2,14 @@ import React from 'react';
 import { Box, Flex, Image, Text, Link } from '@chakra-ui/react';
 import { ExternalLinkIcon } from '@chakra-ui/icons';
 import { IoReload } from 'react-icons/io5';
+import { TokenType } from '../TokenContainer';
 
 interface CoinCardProps {
-  name: string;
-  quantity: number;
-  value: string;
-  imageUrl: string;
+  token: TokenType;
   onRefresh: () => void;
 }
 
-const CoinHeldCard: React.FC<CoinCardProps> = ({
-  name,
-  value,
-  quantity,
-  imageUrl,
-  onRefresh,
-}) => {
+const CoinHeldCard: React.FC<CoinCardProps> = ({ token, onRefresh }) => {
   return (
     <Box
       p={4}
@@ -31,8 +23,8 @@ const CoinHeldCard: React.FC<CoinCardProps> = ({
       <Flex align={'start'} justify="space-between">
         <Flex align="center">
           <Image
-            src={imageUrl}
-            alt={name}
+            src={token?.imageUrl || ''}
+            alt={token?.name}
             boxSize="42px"
             borderRadius="full"
             bg="white"
@@ -45,7 +37,7 @@ const CoinHeldCard: React.FC<CoinCardProps> = ({
               fontSize="16px"
               lineHeight="22px"
             >
-              {`${quantity} ${name}`}
+              {`${token?.name}`}
             </Text>
             <Text
               fontSize="14"
@@ -53,7 +45,7 @@ const CoinHeldCard: React.FC<CoinCardProps> = ({
               lineHeight={'20px'}
               color="#3DD37C"
             >
-              {value}
+              {token?.ticker || ''}
             </Text>
           </Box>
         </Flex>

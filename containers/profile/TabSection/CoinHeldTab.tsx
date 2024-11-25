@@ -1,28 +1,44 @@
-import React from 'react';
-import { Box, Button, Grid, Flex } from '@chakra-ui/react';
-import { IoEyeOff } from 'react-icons/io5';
+import React, { useEffect, useState } from 'react';
+import { Box, Grid } from '@chakra-ui/react';
+import { useSession } from 'next-auth/react';
+import { useParams } from 'next/navigation';
 import Pagination from '@/components/Pagination';
 import CoinHeldCard from '@/components/CoinHeldCard';
-import { coinHeadFakeData } from './fakedata';
+import { TokenType } from '@/components/TokenContainer';
+
+import { DEFAULT_ITEMS_PER_PAGE } from '@/constants';
+import { toast } from 'react-toastify';
 
 const CoinHeldTab = () => {
+  const [listToken, setListToken] = useState<Array<TokenType>>([]);
+  const [pagination, setPagination] = useState({
+    page: 1,
+    totalPages: 1,
+  });
+  const [loading, setLoading] = useState<boolean>(false);
+  const { data: session } = useSession({
+    required: false,
+  });
+  const params = useParams();
+
+  const getListToken = async () => {
+    try {
+      //TODO: fetch token list
+    } catch (error) {
+      toast.error('Get list token error');
+    }
+  };
+
+  const handleChangePage = (page: number) => {
+    setPagination({ ...pagination, page });
+  };
+
+  useEffect(() => {
+    getListToken();
+  }, [pagination.page, params?.id, session]);
+
   return (
     <Box p={4} borderRadius="lg">
-      <Flex justify="space-between" align="center" mb={4}>
-        <Button
-          leftIcon={<IoEyeOff />}
-          size="sm"
-          color="#AC65F3"
-          variant="link"
-          fontSize={14}
-          fontWeight={700}
-          lineHeight={'20px'}
-          background={'transparent'}
-        >
-          Hide dust token
-        </Button>
-      </Flex>
-
       <Grid
         templateColumns={{
           base: 'repeat(1, 1fr)',
@@ -31,18 +47,18 @@ const CoinHeldTab = () => {
         }}
         gap={4}
       >
-        {coinHeadFakeData.map((item, index) => (
-          <CoinHeldCard
-            name={item.name}
-            quantity={item.quantity}
-            value={item.value}
-            imageUrl={item.image}
-            onRefresh={() => {}}
-          />
+        {listToken.map((item, index) => (
+          <CoinHeldCard token={item} onRefresh={() => {}} />
         ))}
       </Grid>
 
-      <Pagination totalPages={2} currentPage={1} onPageChange={() => {}} />
+      {!!listToken.length && (
+        <Pagination
+          totalPages={pagination.totalPages}
+          currentPage={pagination.page}
+          onPageChange={handleChangePage}
+        />
+      )}
     </Box>
   );
 };

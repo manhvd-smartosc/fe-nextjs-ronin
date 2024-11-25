@@ -38,8 +38,10 @@ const HowItWorkModal = ({ isOpen, onOpen, onClose }: HowItWorkModalProps) => {
           <ModalBody textAlign="center" backgroundColor="#1A1A1A">
             <Box marginBottom={4}>
               Ronin.fun prevents rugs by making sure that all created tokens are
-              safe. Each coin on Ronin is a <strong>fair-launch</strong> with no{' '}
-              <strong>presale</strong> and <strong>no team allocation</strong>.
+              safe. Each coin on Ronin is a <strong>fair-launch</strong> with{' '}
+              <br />
+              <strong>no presale</strong> and{' '}
+              <strong>no team allocation</strong>.
             </Box>
             <List spacing={4}>
               <ListItem>step 1: pick a coin that you like</ListItem>
@@ -57,9 +59,9 @@ const HowItWorkModal = ({ isOpen, onOpen, onClose }: HowItWorkModalProps) => {
               </ListItem>
             </List>
           </ModalBody>
-          <ModalFooter justifyContent="center">
+          <ModalFooter justifyContent="center" alignItems="center">
             <Button variant="solid" onClick={onClose} borderRadius="20px">
-              I'm ready to Ronin.fun!
+              I'm ready to fun!
             </Button>
           </ModalFooter>
         </ModalContent>

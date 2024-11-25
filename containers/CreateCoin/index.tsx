@@ -59,7 +59,7 @@ const CreateCoinContainer = () => {
     onOpen: onOpenPopup,
     onClose: onClosePopup,
   } = useDisclosure();
-  const [showMoreOption, setShowMoreOption] = useState<boolean>(true);
+  const [showMoreOption, setShowMoreOption] = useState<boolean>(false);
   const [file, setFile] = useState<UploadedFile | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
 
@@ -227,13 +227,21 @@ const CreateCoinContainer = () => {
             >
               {/* upload file */}
               {file ? (
-                <Box position="relative" width="270px" height="270px">
+                <Box
+                  position="relative"
+                  width="270px"
+                  height="270px"
+                  display={'flex'}
+                  justifyContent={'center'}
+                  alignItems={'center'}
+                >
                   <Image
                     src={file?.preview}
                     alt={file?.file.name}
                     objectFit="contain"
                     width="270px"
                     height="auto"
+                    maxHeight="270px"
                   />
                   <Box
                     position="absolute"

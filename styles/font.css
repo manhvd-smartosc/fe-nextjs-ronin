@@ -1,13 +1,13 @@
 @font-face {
     font-family: 'Helvetica Neue';
-    src: url('/fonts/helvetica-neue/Helvetica NeueMedium.otf') format('truetype');
+    src: url('../public/fonts/helvetica-neue/HelveticaNeueMedium.otf') format('truetype');
     font-weight: 400;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'Zuume';
-    src: url('/fonts/zuume/Zuume Regular.ttf') format('truetype');
+    src: url('../public/fonts/zuume/Zuume Regular.ttf') format('truetype');
     font-weight: 700;
     font-style: normal;
 }

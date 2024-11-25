@@ -53,20 +53,6 @@ const CoinCreateTab = () => {
 
   return (
     <Box p={4} borderRadius="lg">
-      <Flex justify="space-between" align="center" mb={4}>
-        <Button
-          leftIcon={<IoEyeOff />}
-          size="sm"
-          color="#AC65F3"
-          variant="link"
-          fontSize={14}
-          fontWeight={700}
-          lineHeight={'20px'}
-          background={'transparent'}
-        >
-          Hide dust token
-        </Button>
-      </Flex>
       <Grid
         templateColumns={{
           base: 'repeat(1, 1fr)',

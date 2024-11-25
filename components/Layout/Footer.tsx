@@ -1,6 +1,7 @@
 import React from 'react';
 import TwitterIcon from '@/assets/icons/twitter.svg';
 import TelegramIcon from '@/assets/icons/telegram.svg';
+import DiscodeIcon from '@/assets/icons/discord.svg';
 import { Box, Image, Text } from '@chakra-ui/react';
 import Link from 'next/link';
 import { StyledFooter } from './index.style';
@@ -45,6 +46,12 @@ const Footer: React.FC = () => {
           target="_blank"
         >
           <Image src={TelegramIcon.src} alt="twitter" objectFit="cover" />
+        </Link>
+        <Link
+          href={process.env.NEXT_PUBLIC_DISCORD_LINK || ''}
+          target="_blank"
+        >
+          <Image src={DiscodeIcon.src} alt="twitter" objectFit="cover" />
         </Link>
       </Box>
     </StyledFooter>

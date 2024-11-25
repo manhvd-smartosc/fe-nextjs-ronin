@@ -80,10 +80,11 @@ const EditProfileModal: React.FC<EditProfileModalProps> = ({
           <StyledModalHeader>Edit Profile</StyledModalHeader>
           <ModalCloseButton className="close-button" />
           <ModalBody
-            pb={6}
+            // pb={6}
             backgroundColor={'#0A0A0A'}
             padding={'24px'}
             borderRadius={'24px'}
+            marginTop={12}
           >
             <Box className="image-wrap-container">
               <Box borderRadius="50%">

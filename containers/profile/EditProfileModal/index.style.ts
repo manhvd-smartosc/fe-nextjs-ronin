@@ -4,7 +4,7 @@ import styled from '@emotion/styled';
 const StyledModalContent = styled(ModalContent)`
   position: relative;
   width: 484px;
-  height: 570px;
+  // height: 570px;
   padding: 0px 16px 24px 16px;
   gap: 24px;
   border-radius: 24px;
@@ -31,7 +31,6 @@ const StyledModalContent = styled(ModalContent)`
     align-items: center;
     gap: 16px;
     margin-bottom: 24px;
-    margin-top: 20px;
   }
 
   .image-preview {

@@ -1,7 +1,7 @@
 import { toast } from 'react-toastify';
 import { API_URL } from '../constants';
 
-type FetchListCandlesticksParams = {
+export type FetchListCandlesticksParams = {
   tokenAddress: string;
   timeframe: '1min' | '5min';
   startTime?: number;

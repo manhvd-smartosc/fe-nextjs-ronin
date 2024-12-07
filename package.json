@@ -12,8 +12,7 @@
     "postinstall": "husky install",
     "migration:run": "npx prisma migrate dev",
     "migration:generate": "yarn prisma generate",
-    "test:server:unit": "jest -i --projects test-server/config/jest.config.unit.js",
-    "test": "jest"
+    "test:server:unit": "jest -i --projects test-server/config/jest.config.unit.js"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.697.0",
@@ -82,32 +81,5 @@
     "supertest": "6.2.4",
     "ts-jest": "29.2.5",
     "typescript": "5.5.3"
-  },
-  "jest": {
-    "preset": "ts-jest",
-    "testEnvironment": "node",
-    "moduleNameMapper": {
-      "^@/(.*)$": "<rootDir>/$1"
-    },
-    "collectCoverage": true,
-    "collectCoverageFrom": [
-      "pages/api/**/*.{js,ts,jsx,tsx}",
-      "lib-server/**/*.{js,ts}"
-    ],
-    "coverageDirectory": "<rootDir>/coverage",
-    "coverageReporters": [
-      "html",
-      "text",
-      "text-summary",
-      "cobertura"
-    ],
-    "coverageThreshold": {
-      "global": {
-        "branches": 80,
-        "functions": 80,
-        "lines": 80,
-        "statements": 80
-      }
-    }
   }
 }

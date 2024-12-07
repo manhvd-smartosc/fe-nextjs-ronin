@@ -2,7 +2,7 @@ import { DEFAULT_ITEMS_PER_PAGE } from '../../constants';
 import { PaginatedResponse, SortDirection } from '../../types';
 import { TradesGetData } from '../../types/models/Token';
 import { TradesResponseData } from '../../types/models/Trade';
-import { filterSearchTerm } from '../../utils/util';
+import { filterSearchTerm } from '../../utils';
 import { prisma } from '../prisma';
 
 export const getTrades = async (

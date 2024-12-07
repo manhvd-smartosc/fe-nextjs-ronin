@@ -19,6 +19,6 @@
       "@/*": ["*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "tsconfig.jest.json", "test-client/utils/address.test.ts"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "tsconfig.jest.json"],
   "exclude": ["node_modules"]
 }

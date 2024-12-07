@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { apiHandler } from '@/lib-server/next-connect';
-import { getCandlesticks } from '@/lib-server/services/candlesticks';
+import { getCandlesTicks } from '@/lib-server/services/candlesticks';
 import {
   validateCandlesTicksGet,
   validateCandlesTicksQueryParams,
@@ -14,7 +14,7 @@ handler.get(
   async (req: NextApiRequest, res: NextApiResponse) => {
     // just to convert types
     const parsedData = validateCandlesTicksQueryParams(req.query);
-    const tokens = await getCandlesticks(parsedData);
+    const tokens = await getCandlesTicks(parsedData);
     return res.status(200).json(tokens);
   },
 );

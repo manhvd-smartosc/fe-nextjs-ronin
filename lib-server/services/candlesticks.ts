@@ -13,7 +13,7 @@ import { Token } from '@prisma/client';
 import moment from 'moment';
 import { ethers } from 'ethers';
 
-export const getCandlesticks = async (
+export const getCandlesTicks = async (
   candlesticksInput: CandlesTickInputData,
 ): Promise<OHLCData[]> => {
   let fromTime = 0;

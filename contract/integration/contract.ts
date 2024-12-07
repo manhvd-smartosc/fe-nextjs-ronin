@@ -183,7 +183,8 @@ const handleApproveToken = async ({
       gas: new BigNumber(gasData.toString()).toFixed(),
       gasPrice: new BigNumber(gasPrice.toString())
         .multipliedBy(120)
-        .dividedBy(100),
+        .dividedBy(100)
+        .toString(10),
       data: tokenContract.interface.encodeFunctionData('approve', [
         mainContractAddress,
         maxApproval.toString(10),

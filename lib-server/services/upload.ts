@@ -3,7 +3,7 @@ import ApiError from '../errors/apiError';
 import FormData from 'form-data';
 import { DeleteObjectCommand, PutObjectCommand } from '@aws-sdk/client-s3';
 import s3Client from '../utils/s3';
-import { uniqueString } from '../../utils/util';
+import { uniqueString } from '../../utils';
 import { extname } from 'path';
 
 export const uploadToIPFS = async (
